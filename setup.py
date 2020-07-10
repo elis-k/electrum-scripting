@@ -30,6 +30,7 @@ setup(
     author_email="stefanliu@outlook.com",
     url="http://github.com/devfans/electrum-scripting",
     license="MIT",
+    install_requires=["jsonrpclib-pelix"],
     packages=["electrum_scripting"],
     include_package_data=True,
     zip_safe=True
