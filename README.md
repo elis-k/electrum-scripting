@@ -1,15 +1,10 @@
 # electrum-scripting
 Scripting interface wrapper for electrum wallet
 
-## Setup
+## Installing
 - Download electrum https://electrum.org/#download
 - Start deamon `electrum daeomon -d`
-```
-
-Install electrum scripting
-```
-pip3 install git+https://github.com/elis-k/electrum-scripting.git
-```
+- Install this module `pip3 install git+https://github.com/elis-k/electrum-scripting.git`
 
 ## Get Started
 
