@@ -2,15 +2,8 @@
 Scripting interface wrapper for electrum wallet
 
 ## Setup
-
-You would need to setup electrum wallet first and start the daemon if required.
-
-Sample setup
-```
-# Download electrum https://electrum.org/#download
-
-# Start deamon
-electrum daeomon -d
+- Download electrum https://electrum.org/#download
+- Start deamon `electrum daeomon -d`
 ```
 
 Install electrum scripting
