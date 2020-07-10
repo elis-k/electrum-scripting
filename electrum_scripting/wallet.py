@@ -2,6 +2,7 @@ import os
 import sys
 import ast
 import warnings
+import time
 import qrcode
 import qrcode.image.svg
 import jsonrpclib
@@ -162,7 +163,7 @@ def get_server(config)
             server.ping()
             return server
         except Exception as e:
-            print_error(f"failed to connect to JSON-RPC server: {e}")
+            print("failed to connect to JSON-RPC server: " + str(e))
         if not create_time or create_time < time.time() - 1.0:
             return None
         # Sleep a bit and try again; it might have just been started
