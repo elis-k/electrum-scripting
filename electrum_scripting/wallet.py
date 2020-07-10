@@ -1,8 +1,10 @@
 import os
 import sys
+import ast
 import warnings
 import qrcode
 import qrcode.image.svg
+import jsonrpclib
 
 MIN_PYTHON_VERSION = "3.6.1"  # FIXME duplicated from setup.py
 _min_python_version_tuple = tuple(map(int, (MIN_PYTHON_VERSION.split("."))))
@@ -141,7 +143,31 @@ def init_cmdline(config_options, server):
         new_password = prompt_password('New password:')
         config_options['new_password'] = new_password
 
-
+def get_server(config)
+    lockfile = daemon.get_lockfile(config)
+    while True:
+        create_time = None
+        try:
+            with open(lockfile) as f:
+                (host, port), create_time = ast.literal_eval(f.read())
+                rpc_user, rpc_password = daemon.get_rpc_credentials(config)
+                if rpc_password == '':
+                    # authentication disabled
+                    server_url = 'http://%s:%d' % (host, port)
+                else:
+                    server_url = 'http://%s:%s@%s:%d' % (
+                        rpc_user, rpc_password, host, port)
+                server = jsonrpclib.Server(server_url)
+            # Test daemon is running
+            server.ping()
+            return server
+        except Exception as e:
+            print_error(f"failed to connect to JSON-RPC server: {e}")
+        if not create_time or create_time < time.time() - 1.0:
+            return None
+        # Sleep a bit and try again; it might have just been started
+        time.sleep(1.0)
+ 
 def get_connected_hw_devices(plugins):
     supported_plugins = plugins.get_hardware_support()
     # scan devices
@@ -261,8 +287,8 @@ class WalletScripting(object):
         config = SimpleConfig(config_options)
         cmdname = config.get('cmd')
 
-        server = daemon.request(config)
-        init_cmdline(config_options, server)
+        server = get_server(config)
+        init_cmdline(config_options)
 
         if server is not None:
             result = server.run_cmdline(config_options)
