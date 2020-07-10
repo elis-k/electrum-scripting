@@ -144,7 +144,7 @@ def init_cmdline(config_options, server):
         new_password = prompt_password('New password:')
         config_options['new_password'] = new_password
 
-def get_server(config)
+def get_server(config):
     lockfile = daemon.get_lockfile(config)
     while True:
         create_time = None
