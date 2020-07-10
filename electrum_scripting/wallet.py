@@ -261,7 +261,7 @@ class WalletScripting(object):
         config = SimpleConfig(config_options)
         cmdname = config.get('cmd')
 
-        server = daemon.get_server(config)
+        server = daemon.request(config)
         init_cmdline(config_options, server)
 
         if server is not None:
