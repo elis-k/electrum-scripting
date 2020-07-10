@@ -25,7 +25,7 @@ python3 -m pip install .[fast]
 
 Install electrum scripting
 ```
-python3 -m pip install electrum-scripting
+pip3 install git+https://github.com/elis-k/electrum-scripting.git
 ```
 
 ## Get Started
