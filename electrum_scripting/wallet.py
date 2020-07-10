@@ -289,7 +289,7 @@ class WalletScripting(object):
         cmdname = config.get('cmd')
 
         server = get_server(config)
-        init_cmdline(config_options)
+        init_cmdline(config_options,server)
 
         if server is not None:
             result = server.run_cmdline(config_options)
