@@ -69,30 +69,6 @@ def prompt_password(prompt, confirm=True):
         password = None
     return password
 
-
-def init_daemon(config_options):
-    config = SimpleConfig(config_options)
-    storage = WalletStorage(config.get_wallet_path())
-    if not storage.file_exists():
-        print_msg("Error: Wallet file not found.")
-        print_msg("Type 'electrum create' to create a new wallet, or provide a path to a wallet with the -w option")
-        sys.exit(0)
-    if storage.is_encrypted():
-        if storage.is_encrypted_with_hw_device():
-            plugins = init_plugins(config, 'cmdline')
-            password = get_password_for_hw_device_encrypted_storage(plugins)
-        elif config.get('password'):
-            password = config.get('password')
-        else:
-            password = prompt_password('Password:', False)
-            if not password:
-                print_msg("Error: Password required")
-                sys.exit(1)
-    else:
-        password = None
-    config_options['password'] = password
-
-
 def init_cmdline(config_options, server):
     config = SimpleConfig(config_options)
     cmdname = config.get('cmd')
